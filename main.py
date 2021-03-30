@@ -1,3 +1,4 @@
 import test
 
-test.display_external_forces()
+# test.display_external_forces()
+test.setup()

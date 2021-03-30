@@ -1,5 +1,7 @@
 import numpy as np
 from skimage import filters
+import scipy.sparse as sp
+from scipy.sparse.linalg import inv
 
 class Snake:
     def __init__(self, initial_approximation_fname):
@@ -14,10 +16,15 @@ class Snake:
         self.alpha = alpha
         self.beta = beta
         self.tau = tau
+        self.setup_iteration_matrix()
 
 
-    def setup_band_matrix(self):
-        pass
+    def setup_iteration_matrix(self):
+        a, b = self.alpha / self.h**2, self.beta / self.h**4
+        diagonals = [-a - 4*b, b, b, -a - 4*b, 2*a + 6*b, -a - 4*b, b, b, -a - 4*b]
+        offsets = [-self.n + 1, -self.n + 2, -2, -1, 0, 1, 2, self.n - 2, self.n - 1]
+        A = sp.diags(diagonals, offsets, shape=(self.n, self.n))
+        self.iter_matrix = inv(A.tocsc() + self.tau*sp.eye(self.n))
 
 
     def update(f_ext):
