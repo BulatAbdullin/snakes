@@ -15,4 +15,3 @@ def display_external_forces():
 def setup():
     snake = Snake("../testdata/astranaut_init_snake.txt")
     snake.set_parameters(alpha=1.0, beta=2.0, tau=0.1)
-    print(snake.iter_matrix.toarray())
