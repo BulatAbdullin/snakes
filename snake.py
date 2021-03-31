@@ -5,7 +5,7 @@ from scipy.sparse.linalg import inv
 
 class Snake:
     def __init__(self, initial_approximation_fname):
-        self.curve = np.loadtxt(initial_approximation_fname)
+        self.curve = np.loadtxt(initial_approximation_fname)[: -1]
 
         # subtract 1 because the first point coincides with the last point
         self.n = self.curve.shape[0] - 1 # number of points
