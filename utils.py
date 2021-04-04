@@ -19,7 +19,7 @@ def display_image_in_actual_size(img, dpi = 80):
     # Display the image.
     ax.imshow(img, cmap='gray')
 
-#    plt.show()
+    #plt.show()
     
     return fig, ax
 
