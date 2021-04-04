@@ -1,0 +1,1 @@
+./main.py astranaut.png astranaut_init_snake.txt astranaut_result.png 0.00001 0.0000001 1 0 1 -0.4
