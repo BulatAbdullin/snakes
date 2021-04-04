@@ -79,9 +79,8 @@ class Snake:
         curve_diff = self.update_curve()
         for i in range(n_max):
             curve_diff = self.update_curve()
-            # Reparameterize the curve every 5 steps
-            if i % 5 == 0:
-                self.reparameterize()
+            # Reparameterize the curve
+            self.reparameterize()
             if curve_diff < eps:
                 break
 
