@@ -35,7 +35,8 @@ def save_mask(fname, snake, img):
     
     mask = skio.imread(fname)
     blue = ((mask[:,:,2] == 255) & (mask[:,:,1] < 255) & (mask[:,:,0] < 255)) * 255
-    skio.imsave(fname, blue)
+    # convert image to np.uint8 to suppress warning
+    skio.imsave(fname, blue.astype(np.uint8))
     plt.ion()
     
 def display_snake(img, init_snake, result_snake):
