@@ -28,7 +28,7 @@ class Snake:
         self.iter_matrix = np.linalg.inv(np.eye(self.n) + self.tau*A)
 
 
-    def set_external_forces(self, img_fname, balloon=0.1, k=0.5, w_line=1.0, w_edge=2.0, sigma=1):
+    def set_external_forces(self, img_fname, balloon=0.1, w_line=1.0, w_edge=2.0, sigma=0.5):
         self.img = skio.imread(img_fname)
         self.balloon = balloon
 
@@ -37,14 +37,13 @@ class Snake:
         potential = -(w_line*potential_line + w_edge*potential_edge)
 
         # force consists of 'x' and 'y' components
-        force = np.array([skfilters.sobel_v(self.img), skfilters.sobel_h(self.img)])
+        force = -np.array([skfilters.sobel_v(potential), skfilters.sobel_h(potential)])
 
         # normalize the forces
         norms = np.linalg.norm(force, axis=0)
         # hack to avoid division by zero
         norms[np.where(norms == 0)] = 1.0
         self.external_force = force / norms
-        self.external_force *= k
 
 
     def update_curve(self):
